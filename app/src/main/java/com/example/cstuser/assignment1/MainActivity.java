@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -13,6 +15,27 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    public void computeButton(View v){
+        // Do something when buttons are clicked
+        Button button = (Button) v;
+
+        ((Button) v).setText("A");
+    }
+
+    public void clearButton(View v){
+        Button button = (Button) v;
+    }
+
+    public void doneButton(View v){
+        Button button = (Button) v;
+    }
+
+    public void exitButtton(View v){
+        Button button = (Button) v;
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
