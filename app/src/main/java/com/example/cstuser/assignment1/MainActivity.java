@@ -8,14 +8,64 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+    Button compute;
+    Button clear;
+    Button done;
+    Button exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        compute = (Button) this.findViewById(R.id.compute);
+        clear = (Button) this.findViewById(R.id.clear);
+        done = (Button) this.findViewById(R.id.done);
+        exit = (Button) this.findViewById(R.id.exit);
+
+        compute.setOnClickListener(this);
+        clear.setOnClickListener(this);
+        done.setOnClickListener(this);
+        exit.setOnClickListener(this);
+    }
+    public void onClick(View v) {
+
+        if (v.getId() == compute.getId()) {
+            compute.setText("a");
+
+            clear.setText("Clear");
+            done.setText("done");
+            exit.setText("Exit");
+        }
+
+        if (v.getId() == clear.getId()) {
+            clear.setText("b");
+
+            compute.setText("Compute");
+            done.setText("done");
+            exit.setText("Exit");
+        }
+
+        if (v.getId() == done.getId()) {
+            done.setText("c");
+
+            clear.setText("Clear");
+            compute.setText("Compute");
+            exit.setText("Exit");
+        }
+
+        if (v.getId() == exit.getId()) {
+            exit.setText("d");
+
+            clear.setText("Clear");
+            compute.setText("Compute");
+            done.setText("done");
+        }
     }
 
+
+    /*
     public void computeButton(View v){
         // Do something when buttons are clicked
         Button button = (Button) v;
@@ -34,6 +84,7 @@ public class MainActivity extends ActionBarActivity {
     public void exitButtton(View v){
         Button button = (Button) v;
     }
+    */
 
 
 
