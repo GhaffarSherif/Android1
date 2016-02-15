@@ -32,35 +32,35 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
 
         if (v.getId() == compute.getId()) {
-            compute.setText("a");
+            compute.setText("CHANGED");
 
-            clear.setText("Clear");
-            done.setText("done");
-            exit.setText("Exit");
+            clear.setText("CLEAR");
+            done.setText("DONE");
+            exit.setText("EXIT");
         }
 
         if (v.getId() == clear.getId()) {
-            clear.setText("b");
+            clear.setText("CHANGED");
 
-            compute.setText("Compute");
-            done.setText("done");
-            exit.setText("Exit");
+            compute.setText("COMPUTE");
+            done.setText("DONE");
+            exit.setText("EXIT");
         }
 
         if (v.getId() == done.getId()) {
-            done.setText("c");
+            done.setText("CHANGED");
 
-            clear.setText("Clear");
-            compute.setText("Compute");
-            exit.setText("Exit");
+            clear.setText("CLEAR");
+            compute.setText("COMPUTE");
+            exit.setText("EXIT");
         }
 
         if (v.getId() == exit.getId()) {
-            exit.setText("d");
+            exit.setText("CHANGED");
 
-            clear.setText("Clear");
-            compute.setText("Compute");
-            done.setText("done");
+            clear.setText("CLEAR");
+            compute.setText("COMPUTE");
+            done.setText("DONE");
         }
     }
 
