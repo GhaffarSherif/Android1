@@ -5,63 +5,118 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.*;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+    // Declaring Arrays for course
+    String[] programming1;
+    String[] programming2;
+    // Declaring widgets
     Button compute;
     Button clear;
     Button done;
     Button exit;
+    RadioButton prog1;
+    RadioButton prog2;
+    RadioGroup radioGroup;
+    TextView eval1;
+    TextView eval2;
+    TextView eval3;
+    EditText name;
+    EditText studentId;
+    EditText mark1;
+    EditText mark2;
+    EditText mark3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Assigning the proper IDs for the proper widgets
         compute = (Button) this.findViewById(R.id.compute);
         clear = (Button) this.findViewById(R.id.clear);
         done = (Button) this.findViewById(R.id.done);
         exit = (Button) this.findViewById(R.id.exit);
 
+        prog1 = (RadioButton) this.findViewById(R.id.prog1);
+        prog2 = (RadioButton) this.findViewById(R.id.prog2);
+        radioGroup = (RadioGroup) this.findViewById(R.id.radioGroup);
+
+        eval1 = (TextView) this.findViewById(R.id.eval1);
+        eval2=(TextView) this.findViewById(R.id.eval2);
+        eval3= (TextView) this.findViewById(R.id.eval3);
+
+        mark1 = (EditText) this.findViewById(R.id.mark1);
+        mark2 = (EditText) this.findViewById(R.id.mark2);
+        mark3 = (EditText) this.findViewById(R.id.mark3);
+        name = (EditText) this.findViewById(R.id.name);
+        studentId = (EditText) this.findViewById(R.id.studentId);
+
+
+        //Setting the listeners for the widgets
         compute.setOnClickListener(this);
         clear.setOnClickListener(this);
         done.setOnClickListener(this);
         exit.setOnClickListener(this);
+        radioGroup.setOnCheckedChangeListener(this);
+
     }
+
     public void onClick(View v) {
-
         if (v.getId() == compute.getId()) {
-            compute.setText("CHANGED");
+            compute.setText("a");
 
-            clear.setText("CLEAR");
-            done.setText("DONE");
-            exit.setText("EXIT");
+            clear.setText("Clear");
+            done.setText("Done");
+            exit.setText("Exit");
         }
 
-        if (v.getId() == clear.getId()) {
-            clear.setText("CHANGED");
+        if (v.getId() == clear.getId()) { // onclick clear button
 
-            compute.setText("COMPUTE");
-            done.setText("DONE");
-            exit.setText("EXIT");
+            // mark1, mark2, mark3, name, studentId
+            mark1.getText().clear();
+            mark2.getText().clear();
+            mark3.getText().clear();
+            name.getText().clear();
+            studentId.getText().clear();
+            Toast.makeText(getApplicationContext(), "Screen Cleared!", Toast.LENGTH_SHORT).show();
+            
         }
 
         if (v.getId() == done.getId()) {
-            done.setText("CHANGED");
+            done.setText("c");
 
-            clear.setText("CLEAR");
-            compute.setText("COMPUTE");
-            exit.setText("EXIT");
+            clear.setText("Clear");
+            compute.setText("Compute");
+            exit.setText("Exit");
         }
 
         if (v.getId() == exit.getId()) {
-            exit.setText("CHANGED");
+            exit.setText("d");
 
-            clear.setText("CLEAR");
-            compute.setText("COMPUTE");
-            done.setText("DONE");
+            clear.setText("Clear");
+            compute.setText("Compute");
+            done.setText("Done");
         }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if (checkedId == prog1.getId()){
+            eval1.setText("Case Study");
+            eval2.setText("Exam 1");
+            eval3.setText("Exam 2");
+
+        }
+        if (checkedId == prog2.getId()){
+            eval1.setText("Assignment 1");
+            eval2.setText("Assignment 2");
+            eval3.setText("Exam");
+        }
+
     }
 
 
@@ -109,4 +164,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
