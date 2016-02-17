@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
+import packFinals.clsFinals;
+
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     // Declaring Arrays for course
@@ -28,6 +30,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     EditText mark1;
     EditText mark2;
     EditText mark3;
+    TextView resultBox;
 
 
     @Override
@@ -54,6 +57,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         mark3 = (EditText) this.findViewById(R.id.mark3);
         name = (EditText) this.findViewById(R.id.name);
         studentId = (EditText) this.findViewById(R.id.studentId);
+
+        resultBox = (TextView) this.findViewById(R.id.resultsBox);
 
 
         //Setting the listeners for the widgets
@@ -94,12 +99,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             exit.setText("Exit");
         }
 
+        //EXIT button
         if (v.getId() == exit.getId()) {
-            exit.setText("d");
+            clsFinals.displayResults(resultBox);
 
-            clear.setText("Clear");
-            compute.setText("Compute");
-            done.setText("Done");
+            //try {
+            //    wait(30000);
+                finish();
+            //} catch (InterruptedException e) {
+            //    e.printStackTrace();
+            //}
         }
     }
 
