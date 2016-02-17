@@ -1,24 +1,35 @@
 package packFinals;
 
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.*;
 
 /**
  * Created by Shadowfire2303 on 15/02/2016.
  */
-public class clsFinals {
-    public ArrayList<String> id = new ArrayList<String>();
-    public ArrayList<String> name = new ArrayList<String>();
-    public ArrayList<Double> grade1 = new ArrayList<Double>();
-    public ArrayList<Double> grade2 = new ArrayList<Double>();
-    public ArrayList<Double> grade3 = new ArrayList<Double>();
-    public ArrayList<Double> finalGrade = new ArrayList<Double>();
-    public ArrayList<String> letterGrade = new ArrayList<String>();
-    public ArrayList<Integer> isProgramming1 = new ArrayList<Integer>();
+public class clsFinals implements InterFinals{
+    public ArrayList<String> studentId;
+    public ArrayList<String> name;
+    public ArrayList<Double> grade1;
+    public ArrayList<Double> grade2;
+    public ArrayList<Double> grade3;
+    public ArrayList<Double> finalGrade;
+    public ArrayList<String> letterGrade;
 
 
-    public static double compute(int mark1, int mark2, int mark3, boolean isProg1){
+    public clsFinals(){
+        studentId = new ArrayList<String>();
+        name = new ArrayList<String>();
+        grade1 = new ArrayList<Double>();
+        grade2 = new ArrayList<Double>();
+        grade3 = new ArrayList<Double>();
+        finalGrade = new ArrayList<Double>();
+        letterGrade = new ArrayList<String>();
+    }
+
+
+    public static double compute(int mark1, int mark2, int mark3, boolean isProg1){ // To compute given grades
          double average= 0;
         if (isProg1)
             average = (mark1*0.3)+(mark2*0.3)+(mark3*0.4);
@@ -41,7 +52,15 @@ public class clsFinals {
         return true;
     }
 
+    public void displayResults(TextView resultBox){
+        String results = "";
 
+        for(int i = 0; i < studentId.size(); i++){
+            results += studentId.get(i) + "\t" + name.get(i) + "\t" + grade1.get(i) + "\t" + grade2.get(i) + "\t" + grade3.get(i) + "\t" + finalGrade.get(i) + "\t" + letterGrade.get(i) + "\n";
+        }
+
+        resultBox.setText(programming1Header + results);
+    }
 
     public static void clear(){
 

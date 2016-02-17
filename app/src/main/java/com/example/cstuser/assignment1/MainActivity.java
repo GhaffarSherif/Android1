@@ -13,9 +13,10 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, InterFinals {
-    // Declaring Arrays for course
-    ArrayList<String> prog1Course;
-    ArrayList<String> prog2Course;
+    // Declaring new objects for courses
+    clsFinals programming1 = new clsFinals();
+    clsFinals programming2 = new clsFinals();
+
     // Declaring widgets
     Button compute;
     Button clear;
@@ -33,7 +34,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     EditText mark1;
     EditText mark2;
     EditText mark3;
-
+    TextView resultBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +62,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         studentId = (EditText) this.findViewById(R.id.studentId);
         finalScore = (TextView) this.findViewById(R.id.finalScore);
 
-        // Setting up the arraylist
-        prog1Course = new ArrayList<String>();
-        prog2Course = new ArrayList<String>();
-
-
         //Setting the listeners for the widgets
         compute.setOnClickListener(this);
         clear.setOnClickListener(this);
@@ -78,6 +74,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v.getId() == compute.getId()) { // Onclick compute button
             double finalGrade;
+            finalScore.setText("Final Score: ");
 
             if (clsFinals.isFilled(name, studentId, mark1, mark2, mark3)){
                 // Create method to check if fields are empty before computing
@@ -101,6 +98,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             mark3.getText().clear();
             name.getText().clear();
             studentId.getText().clear();
+            finalScore.setText("");
             Toast.makeText(getApplicationContext(), "Screen Cleared!", Toast.LENGTH_SHORT).show();
         }
 
@@ -113,11 +111,31 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
 
         if (v.getId() == exit.getId()) {
-            exit.setText("d");
+            /*clsFinals.id.add("111"); clsFinals.id.add("111"); clsFinals.id.add("111");
+            clsFinals.name.add("aaa"); clsFinals.name.add("bbb"); clsFinals.name.add("ccc");
+            clsFinals.grade1.add(12.0); clsFinals.grade1.add(50.0); clsFinals.grade1.add(100.0);
+            clsFinals.grade2.add(15.0); clsFinals.grade2.add(53.0); clsFinals.grade2.add(103.0);
+            clsFinals.grade3.add(18.0); clsFinals.grade3.add(56.0); clsFinals.grade3.add(106.0);
+            clsFinals.finalGrade.add(50.0); clsFinals.finalGrade.add(80.0); clsFinals.finalGrade.add(110.0);
+            clsFinals.letterGrade.add("A"); clsFinals.letterGrade.add("B"); clsFinals.letterGrade.add("C");
+            clsFinals.isProgramming1.add(1); clsFinals.isProgramming1.add(0); clsFinals.isProgramming1.add(1);*/
 
-            clear.setText("Clear");
-            compute.setText("Compute");
-            done.setText("Done");
+
+            programming1.displayResults(resultBox);
+            programming2.displayResults(resultBox);
+
+            try {
+                Thread.sleep(30000);
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+
+            //try {
+            //    wait(30000);
+            finish();
+            //} catch (InterruptedException e) {
+            //    e.printStackTrace();
+            //}
         }
     }
 
