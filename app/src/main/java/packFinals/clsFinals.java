@@ -1,5 +1,7 @@
 package packFinals;
 
+import android.widget.EditText;
+
 import java.util.*;
 
 /**
@@ -15,7 +17,34 @@ public class clsFinals {
     public ArrayList<String> letterGrade = new ArrayList<String>();
     public ArrayList<Integer> isProgramming1 = new ArrayList<Integer>();
 
-    public static calculate(){
+
+    public static double compute(int mark1, int mark2, int mark3, boolean isProg1){
+         double average= 0;
+        if (isProg1)
+            average = (mark1*0.3)+(mark2*0.3)+(mark3*0.4);
+        else
+            average = (mark1*0.2)+(mark2*0.3)+(mark3*0.5);
+        return average;
+    }
+
+    /**
+     * Intended to validate if all fields are empty or not
+     */
+    public static boolean isFilled(EditText name,EditText id, EditText mark1, EditText mark2,EditText mark3){
+
+
+        if (name.getText().toString().trim().length()==0 || id.getText().toString().trim().length()==0 ||
+                mark1.getText().toString().trim().length()==0 || mark2.getText().toString().trim().length()==0
+                || mark3.getText().toString().trim().length()==0){
+            return false;
+        }
+        return true;
+    }
+
+
+
+    public static void clear(){
 
     }
+
 }

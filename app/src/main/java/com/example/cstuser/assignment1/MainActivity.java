@@ -6,12 +6,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import packFinals.InterFinals;
+import packFinals.clsFinals;
+
+import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, InterFinals {
     // Declaring Arrays for course
-    String[] programming1;
-    String[] programming2;
+    ArrayList<String> prog1Course;
+    ArrayList<String> prog2Course;
     // Declaring widgets
     Button compute;
     Button clear;
@@ -23,6 +27,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     TextView eval1;
     TextView eval2;
     TextView eval3;
+    TextView finalScore;
     EditText name;
     EditText studentId;
     EditText mark1;
@@ -54,6 +59,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         mark3 = (EditText) this.findViewById(R.id.mark3);
         name = (EditText) this.findViewById(R.id.name);
         studentId = (EditText) this.findViewById(R.id.studentId);
+        finalScore = (TextView) this.findViewById(R.id.finalScore);
+
+        // Setting up the arraylist
+        prog1Course = new ArrayList<String>();
+        prog2Course = new ArrayList<String>();
 
 
         //Setting the listeners for the widgets
@@ -66,16 +76,25 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void onClick(View v) {
-        if (v.getId() == compute.getId()) {
-            compute.setText("a");
+        if (v.getId() == compute.getId()) { // Onclick compute button
+            double finalGrade;
 
-            clear.setText("Clear");
-            done.setText("Done");
-            exit.setText("Exit");
+            if (clsFinals.isFilled(name, studentId, mark1, mark2, mark3)){
+                // Create method to check if fields are empty before computing
+                if (prog1.isChecked())
+                    finalGrade = clsFinals.compute(Integer.parseInt(mark1.getText().toString()),Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), true);
+                else
+                    finalGrade = clsFinals.compute(Integer.parseInt(mark1.getText().toString()), Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), false);
+
+                finalScore.append(""+finalGrade);
+                finalScore.setVisibility(View.VISIBLE);
+            }
+            else
+                Toast.makeText(MainActivity.this, "Not all fields are filled!", Toast.LENGTH_SHORT).show();
+
         }
 
         if (v.getId() == clear.getId()) { // onclick clear button
-
             // mark1, mark2, mark3, name, studentId
             mark1.getText().clear();
             mark2.getText().clear();
@@ -83,7 +102,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             name.getText().clear();
             studentId.getText().clear();
             Toast.makeText(getApplicationContext(), "Screen Cleared!", Toast.LENGTH_SHORT).show();
-            
         }
 
         if (v.getId() == done.getId()) {
@@ -118,28 +136,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
 
     }
-
-
-    /*
-    public void computeButton(View v){
-        // Do something when buttons are clicked
-        Button button = (Button) v;
-
-        ((Button) v).setText("A");
-    }
-
-    public void clearButton(View v){
-        Button button = (Button) v;
-    }
-
-    public void doneButton(View v){
-        Button button = (Button) v;
-    }
-
-    public void exitButtton(View v){
-        Button button = (Button) v;
-    }
-    */
 
 
 
