@@ -13,9 +13,10 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, InterFinals {
-    // Declaring new objects for courses
-    clsFinals programming1 = new clsFinals();
-    clsFinals programming2 = new clsFinals();
+    // Declaring new student objects and sudentResults for both courses
+    clsFinals student = new clsFinals();
+    String prog1Results = "";
+    String prog2Results = "";
 
     // Declaring widgets
     Button compute;
@@ -152,7 +153,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             eval2.setText("Assignment 2");
             eval3.setText("Exam");
         }
-
     }
 
 
