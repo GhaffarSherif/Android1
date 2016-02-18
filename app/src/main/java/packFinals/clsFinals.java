@@ -10,25 +10,34 @@ import java.util.*;
 public class clsFinals implements InterFinals{
     public int studentId;
     public String name;
-    public Double grade1;
-    public Double grade2;
-    public Double grade3;
-    public Double finalGrade;
-    public char letterGrade;
+    public double grade1;
+    public double grade2;
+    public double grade3;
+    public double finalGrade = ZERO;
+    public char letterGrade = ' ';
 
 
     public clsFinals(){
-        studentId = 0;
-        name = "";
-        letterGrade = ' ';
-        grade1 = 0.0;
-        grade2 = 0.0;
-        grade3 = 0.0;
-        finalGrade = 0.0;
+        studentId = ZERO;
+        name = BLANK;
+        grade1 = ZERO;
+        grade2 = ZERO;
+        grade3 = ZERO;
     }
+
+    public clsFinals(int studentId, String name, double grade1, double grade2, double grade3){
+        this.studentId = studentId;
+        this.name = name;
+        this.grade1 = grade1;
+        this.grade2 = grade2;
+        this.grade3 = grade3;
+    }
+
+
     public void setStudentId(int id){
         studentId = id;
     }
+
     public void setName(String studentName){
         name = studentName;
     }
@@ -51,6 +60,13 @@ public class clsFinals implements InterFinals{
         else
             average = (mark1*0.2)+(mark2*0.3)+(mark3*0.5);
         return average;
+    }
+
+    public char calcLetterGrade(int grade){
+       // if (){
+
+     //   }
+        return ' ';
     }
 
     /**

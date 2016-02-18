@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, InterFinals {
     // Declaring new student objects and sudentResults for both courses
-    clsFinals student = new clsFinals();
+    clsFinals studentInfo;
     String prog1Results = "";
     String prog2Results = "";
 
