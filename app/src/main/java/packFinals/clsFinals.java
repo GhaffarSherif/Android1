@@ -43,7 +43,7 @@ public class clsFinals implements InterFinals{
     public void setName(String studentName){
         name = studentName;
     }
-    
+
     public void setGrade1(Double mark1){
         grade1 = mark1;
     }
@@ -82,10 +82,9 @@ public class clsFinals implements InterFinals{
         return ' ';
     }
 
-    /**
-     * Intended to validate if all fields are empty or not
-     */
-    public static boolean isFilled(EditText name,EditText id, EditText mark1, EditText mark2,EditText mark3){
+
+    /*
+    public boolean isFilled(){
 
         if (name.getText().toString().trim().length()==0 || id.getText().toString().trim().length()==0 ||
                 mark1.getText().toString().trim().length()==0 || mark2.getText().toString().trim().length()==0
@@ -94,9 +93,9 @@ public class clsFinals implements InterFinals{
         }
         return true;
     }
+    */
 
-
-    public void displayResults(TextView resultBox){
+    /*public void displayResults(TextView resultBox){
         String results = "";
 
         for(int i = 0; i < studentId.size(); i++){
@@ -105,9 +104,7 @@ public class clsFinals implements InterFinals{
 
         resultBox.setText(programming1Header + results);
     }
+    */
 
-    public static void clear(){
-
-    }
 
 }

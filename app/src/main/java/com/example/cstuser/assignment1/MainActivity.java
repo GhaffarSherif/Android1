@@ -74,21 +74,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     public void onClick(View v) {
         if (v.getId() == compute.getId()) { // Onclick compute button
-            if (clsFinals.isFilled(name, studentId, mark1, mark2, mark3)){
-                double finalGrade;
-                // int studentId, String name, double grade1, double grade2, double grade3, boolean isProg1
-                if (prog1.isChecked())
+            if (isFilled()){
+                if (prog1.isChecked()) // Checking which radiobutton is checked, then passing info to the clsFinals object
                     studentInfo = new clsFinals(Integer.parseInt(studentId.getText().toString()), name.getText().toString(), Integer.parseInt(mark1.getText().toString()),
                             Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), true);
                 else
                     studentInfo = new clsFinals(Integer.parseInt(studentId.getText().toString()), name.getText().toString(), Integer.parseInt(mark1.getText().toString()),
                             Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), false);
 
-
-                finalGrade = studentInfo.compute();
-
-                finalScore.setText("Final Score: ");
-                finalScore.append(""+finalGrade);
+                studentInfo.compute();
+                finalScore.setText("Final Score: " +studentInfo.getFinalGrade()+ " ");
                 finalScore.setVisibility(View.VISIBLE);
             }
             else
@@ -126,8 +121,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             clsFinals.isProgramming1.add(1); clsFinals.isProgramming1.add(0); clsFinals.isProgramming1.add(1);*/
 
 
-            programming1.displayResults(resultBox);
-            programming2.displayResults(resultBox);
+         //   programming1.displayResults(resultBox);
+           // programming2.displayResults(resultBox);
 
             try {
                 Thread.sleep(30000);
@@ -183,5 +178,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    private boolean isFilled(){
+
+        if (name.getText().toString().trim().length()==0 || studentId.getText().toString().trim().length()==0 ||
+                mark1.getText().toString().trim().length()==0 || mark2.getText().toString().trim().length()==0
+                || mark3.getText().toString().trim().length()==0){
+            return false;
+        }
+        return true;
+    }
 
 }
