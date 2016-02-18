@@ -15,6 +15,7 @@ public class clsFinals implements InterFinals{
     public double grade3;
     public double finalGrade = ZERO;
     public char letterGrade = ' ';
+    boolean isProg1;
 
 
     public clsFinals(){
@@ -25,12 +26,13 @@ public class clsFinals implements InterFinals{
         grade3 = ZERO;
     }
 
-    public clsFinals(int studentId, String name, double grade1, double grade2, double grade3){
+    public clsFinals(int studentId, String name, double grade1, double grade2, double grade3, boolean isProg1){
         this.studentId = studentId;
         this.name = name;
         this.grade1 = grade1;
         this.grade2 = grade2;
         this.grade3 = grade3;
+        this.isProg1 = isProg1;
     }
 
 
@@ -41,25 +43,36 @@ public class clsFinals implements InterFinals{
     public void setName(String studentName){
         name = studentName;
     }
+    
     public void setGrade1(Double mark1){
         grade1 = mark1;
     }
+
     public void setGrade2(Double mark2) {
+
         grade2 = mark2;
     }
+
     public void setGrade3(Double mark3){
+
         grade3 = mark3;
     }
 
+    public char getLetterGrade(){
+        return letterGrade;
+    }
+
+    public double getFinalGrade(){
+        return finalGrade;
+    }
 
 
-    public static double compute(int mark1, int mark2, int mark3, boolean isProg1){ // To compute given grades
-         double average= 0;
+
+    public void compute(){ // To compute given grades
         if (isProg1)
-            average = (mark1*0.3)+(mark2*0.3)+(mark3*0.4);
+            finalGrade = (grade1*0.3)+(grade2*0.3)+(grade3*0.4);
         else
-            average = (mark1*0.2)+(mark2*0.3)+(mark3*0.5);
-        return average;
+            finalGrade = (grade1*0.2)+(grade2*0.3)+(grade3*0.5);
     }
 
     public char calcLetterGrade(int grade){

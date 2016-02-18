@@ -74,16 +74,20 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     public void onClick(View v) {
         if (v.getId() == compute.getId()) { // Onclick compute button
-            double finalGrade;
-            finalScore.setText("Final Score: ");
-
             if (clsFinals.isFilled(name, studentId, mark1, mark2, mark3)){
-                // Create method to check if fields are empty before computing
+                double finalGrade;
+                // int studentId, String name, double grade1, double grade2, double grade3, boolean isProg1
                 if (prog1.isChecked())
-                    finalGrade = clsFinals.compute(Integer.parseInt(mark1.getText().toString()),Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), true);
+                    studentInfo = new clsFinals(Integer.parseInt(studentId.getText().toString()), name.getText().toString(), Integer.parseInt(mark1.getText().toString()),
+                            Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), true);
                 else
-                    finalGrade = clsFinals.compute(Integer.parseInt(mark1.getText().toString()), Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), false);
+                    studentInfo = new clsFinals(Integer.parseInt(studentId.getText().toString()), name.getText().toString(), Integer.parseInt(mark1.getText().toString()),
+                            Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), false);
 
+
+                finalGrade = studentInfo.compute();
+
+                finalScore.setText("Final Score: ");
                 finalScore.append(""+finalGrade);
                 finalScore.setVisibility(View.VISIBLE);
             }
