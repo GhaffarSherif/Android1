@@ -122,21 +122,22 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             clsFinals.isProgramming1.add(1); clsFinals.isProgramming1.add(0); clsFinals.isProgramming1.add(1);*/
 
 
-            programming1.displayResults(resultBox);
-            programming2.displayResults(resultBox);
+            //programming1.displayResults(resultBox);
+            //programming2.displayResults(resultBox);
 
-            try {
+            /*try {
                 Thread.sleep(30000);
             } catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
 
-            //try {
-            //    wait(30000);
+            try {
+                wait(30000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+
             finish();
-            //} catch (InterruptedException e) {
-            //    e.printStackTrace();
-            //}
         }
     }
 

@@ -14,7 +14,7 @@ public class clsFinals implements InterFinals{
     public double grade2;
     public double grade3;
     public double finalGrade = ZERO;
-    public char letterGrade = ' ';
+    public char letterGrade = BLANK_CHAR;
 
 
     public clsFinals(){
@@ -63,10 +63,20 @@ public class clsFinals implements InterFinals{
     }
 
     public char calcLetterGrade(int grade){
-       // if (){
+        char letterGrade = BLANK_CHAR;
 
-     //   }
-        return ' ';
+        if(grade >= GRADE_A_LOWER_LIMIT && grade < GRADE_A_UPPER_LIMIT)
+            letterGrade = GRADE_A;
+        else if(grade >= GRADE_B_LOWER_LIMIT && grade < GRADE_B_UPPER_LIMIT)
+            letterGrade = GRADE_B;
+        else if(grade >= GRADE_C_LOWER_LIMIT && grade < GRADE_C_UPPER_LIMIT)
+            letterGrade = GRADE_C;
+        else if(grade >= GRADE_D_LOWER_LIMIT && grade < GRADE_D_UPPER_LIMIT)
+            letterGrade = GRADE_D;
+        else if(grade >= GRADE_F_LOWER_LIMIT && grade < GRADE_F_UPPER_LIMIT)
+            letterGrade = GRADE_F;
+
+        return letterGrade;
     }
 
     /**
@@ -83,14 +93,9 @@ public class clsFinals implements InterFinals{
     }
 
 
-    public void displayResults(TextView resultBox){
-        String results = "";
-
-        for(int i = 0; i < studentId.size(); i++){
-            results += studentId.get(i) + "\t" + name.get(i) + "\t" + grade1.get(i) + "\t" + grade2.get(i) + "\t" + grade3.get(i) + "\t" + finalGrade.get(i) + "\t" + letterGrade.get(i) + "\n";
-        }
-
-        resultBox.setText(programming1Header + results);
+    public String displayResults(){
+        String results = studentId + "\t" + name + "\t" + grade1 + "\t" + grade2 + "\t" + grade3 + "\t" + finalGrade + "\t" + letterGrade + "\n";
+        return results;
     }
 
     public static void clear(){
