@@ -3,4 +3,22 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="chooseCourse">Choose Course:</string>
+
+    <string name="report">%1$s</string>
+    <string name="final_score">Final Score: </string>
+
+    <string name="nameTag">Full Name:</string>
+    <string name="idTag">Student ID:</string>
+
+    <string name="eval1Prog1">Case Study:</string>
+    <string name="eval2Prog1">Exam 1:</string>
+    <string name="eval3Prog1">Exam 2:</string>
+
+    <string name="eval1Prog2">Assignment 1:</string>
+    <string name="eval2Prog2">Assignment 2:</string>
+    <string name="eval3Prog2">Exam:</string>
+
+    <string name="results">Results:</string>
 </resources>

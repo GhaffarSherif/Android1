@@ -1,10 +1,5 @@
 package packFinals;
 
-import java.util.*;
-
-/**
- * Created by Shadowfire2303 on 15/02/2016.
- */
 public interface InterFinals {
     public final char GRADE_A = 'A';
     public final char GRADE_B = 'B';
@@ -23,9 +18,11 @@ public interface InterFinals {
     public final int GRADE_F_UPPER_LIMIT = 59;
     public final int GRADE_F_LOWER_LIMIT = 0;
 
-    public final String programming1Header = "ID\tStudent\tCase /30\tEx 1/30\tEx 2/40\tFinal/100\tLetter Grade\n";
-    public final String programming2Header = "ID\tStudent\tAs1/20\tAs2/30\tEx/50\tFinal/100\tLetter Grade\n";
+    public final String PROGRAMMING_1_HEADER = String.format("%-6s", "ID") + String.format("%-22s", "Student Name") + String.format("%-9s", "Case/30") + String.format("%-9s", "Ex1/30") + String.format("%-9s", "Ex2/40") + String.format("%-11s", "Final/100") + String.format("%-12s", "Letter Grade") + "\n";
+    public final String PROGRAMMING_2_HEADER = "\n" + String.format("%-6s", "ID") + String.format("%-22s", "Student Name") + String.format("%-9s", "As1/20") + String.format("%-9s", "As2/30") + String.format("%-9s", "Ex/50") + String.format("%-11s", "Final/100") + String.format("%-12s", "Letter Grade") + "\n";
     public final String BLANK = "";
     public final char BLANK_CHAR = ' ';
     public final int ZERO = 0;
+
+    public final int TIME_TO_END_PROCESS_MS = 30000;
 }

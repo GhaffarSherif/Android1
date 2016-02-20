@@ -1,5 +1,8 @@
 package com.example.cstuser.assignment1;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,14 +12,11 @@ import android.widget.*;
 import packFinals.InterFinals;
 import packFinals.clsFinals;
 
-import java.util.ArrayList;
-
-
 public class MainActivity extends ActionBarActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, InterFinals {
-    // Declaring new student objects and sudentResults for both courses
+    // Declaring new student object to store info and two strings for the results for both classes
     clsFinals studentInfo;
-    String prog1Results = "";
-    String prog2Results = "";
+    String prog1Results = PROGRAMMING_1_HEADER;
+    String prog2Results = PROGRAMMING_2_HEADER;
 
     // Declaring widgets
     Button compute;
@@ -35,7 +35,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     EditText mark1;
     EditText mark2;
     EditText mark3;
-    TextView resultBox;
+    TextView resultsBox;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +56,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         eval1 = (TextView) this.findViewById(R.id.eval1);
         eval2=(TextView) this.findViewById(R.id.eval2);
         eval3= (TextView) this.findViewById(R.id.eval3);
+        finalScore = (TextView) this.findViewById(R.id.finalScore);
+        resultsBox = (TextView) this.findViewById(R.id.resultsBox);
+
 
         mark1 = (EditText) this.findViewById(R.id.mark1);
         mark2 = (EditText) this.findViewById(R.id.mark2);
         mark3 = (EditText) this.findViewById(R.id.mark3);
         name = (EditText) this.findViewById(R.id.name);
         studentId = (EditText) this.findViewById(R.id.studentId);
-        finalScore = (TextView) this.findViewById(R.id.finalScore);
 
-        //Setting the listeners for the widgets
+        //Setting the listeners for the widgets in use
         compute.setOnClickListener(this);
         clear.setOnClickListener(this);
         done.setOnClickListener(this);
@@ -74,85 +77,64 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     public void onClick(View v) {
         if (v.getId() == compute.getId()) { // Onclick compute button
-            double finalGrade;
-            finalScore.setText("Final Score: ");
-
-            if (clsFinals.isFilled(name, studentId, mark1, mark2, mark3)){
-                // Create method to check if fields are empty before computing
+            if (isFilled() && isValid()){
+                // Checking which radiobutton is checked, then passing info to the clsFinals object
                 if (prog1.isChecked())
-                    finalGrade = clsFinals.compute(Integer.parseInt(mark1.getText().toString()),Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), true);
+                    studentInfo = new clsFinals(Integer.parseInt(studentId.getText().toString()), name.getText().toString(), Integer.parseInt(mark1.getText().toString()),
+                            Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), true);
                 else
-                    finalGrade = clsFinals.compute(Integer.parseInt(mark1.getText().toString()), Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), false);
+                    studentInfo = new clsFinals(Integer.parseInt(studentId.getText().toString()), name.getText().toString(), Integer.parseInt(mark1.getText().toString()),
+                            Integer.parseInt(mark2.getText().toString()), Integer.parseInt(mark3.getText().toString()), false);
 
-                finalScore.append(""+finalGrade);
-                finalScore.setVisibility(View.VISIBLE);
+                studentInfo.calculateScore();
+                setFinalScore();
             }
-            else
-                Toast.makeText(MainActivity.this, "Not all fields are filled!", Toast.LENGTH_SHORT).show();
-
         }
 
         if (v.getId() == clear.getId()) { // onclick clear button
-            // mark1, mark2, mark3, name, studentId
             mark1.getText().clear();
             mark2.getText().clear();
             mark3.getText().clear();
             name.getText().clear();
             studentId.getText().clear();
-            finalScore.setText("");
+            finalScore.setText(BLANK);
             Toast.makeText(getApplicationContext(), "Screen Cleared!", Toast.LENGTH_SHORT).show();
         }
 
         if (v.getId() == done.getId()) {
-            done.setText("c");
-
-            clear.setText("Clear");
-            compute.setText("Compute");
-            exit.setText("Exit");
+            if (isFilled()) {
+                compute.performClick();
+                alertMessage();
+            }
         }
 
         if (v.getId() == exit.getId()) {
-            /*clsFinals.id.add("111"); clsFinals.id.add("111"); clsFinals.id.add("111");
-            clsFinals.name.add("aaa"); clsFinals.name.add("bbb"); clsFinals.name.add("ccc");
-            clsFinals.grade1.add(12.0); clsFinals.grade1.add(50.0); clsFinals.grade1.add(100.0);
-            clsFinals.grade2.add(15.0); clsFinals.grade2.add(53.0); clsFinals.grade2.add(103.0);
-            clsFinals.grade3.add(18.0); clsFinals.grade3.add(56.0); clsFinals.grade3.add(106.0);
-            clsFinals.finalGrade.add(50.0); clsFinals.finalGrade.add(80.0); clsFinals.finalGrade.add(110.0);
-            clsFinals.letterGrade.add("A"); clsFinals.letterGrade.add("B"); clsFinals.letterGrade.add("C");
-            clsFinals.isProgramming1.add(1); clsFinals.isProgramming1.add(0); clsFinals.isProgramming1.add(1);*/
+            showReport();
 
-
-            //programming1.displayResults(resultBox);
-            //programming2.displayResults(resultBox);
-
-            /*try {
-                Thread.sleep(30000);
-            } catch(InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-
-            try {
-                wait(30000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
-
-            finish();
+            final Handler handler = new Handler();
+            //Delays the calling of the finish() method by
+            //time equal to TIME_TO_END_PROCESS_MS in milliseconds.
+            handler.postDelayed(new Runnable(){
+                @Override
+                public void run() {
+                    finish();
+                }
+            }, TIME_TO_END_PROCESS_MS);
         }
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if (checkedId == prog1.getId()){
-            eval1.setText("Case Study");
-            eval2.setText("Exam 1");
-            eval3.setText("Exam 2");
+            eval1.setText(R.string.eval1Prog1);
+            eval2.setText(R.string.eval2Prog1);
+            eval3.setText(R.string.eval3Prog1);
 
         }
         if (checkedId == prog2.getId()){
-            eval1.setText("Assignment 1");
-            eval2.setText("Assignment 2");
-            eval3.setText("Exam");
+            eval1.setText(R.string.eval1Prog2);
+            eval2.setText(R.string.eval2Prog2);
+            eval3.setText(R.string.eval3Prog2);
         }
     }
 
@@ -180,5 +162,84 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    private boolean isFilled(){
+        // Checks if not filled
+        if (name.getText().toString().trim().length()==0 || studentId.getText().toString().trim().length()==0 ||
+                mark1.getText().toString().trim().length()==0 || mark2.getText().toString().trim().length()==0
+                || mark3.getText().toString().trim().length()==0){
+            Toast.makeText(MainActivity.this, "Not all fields are filled!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
 
+    private void setFinalScore(){
+        finalScore.setText(String.format("%s%-18s","Final Score: ", studentInfo.finalGrade) +  "Letter Grade: " + studentInfo.letterGrade);
+    }
+
+    /**
+     * Creates and displays a confirmation message to check if the user would like to enter more values.
+     */
+    private void alertMessage() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        clear.performClick();
+                        addResults();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        clear.performClick();
+                        addResults();
+                        exit.performClick();
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Would you like to enter another student?")
+                .setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
+    }
+
+    /**
+     * Adds the results of a student to the cumulative string containing all student's value for a given class.
+     */
+    private void addResults() {
+        if(prog1.isChecked())
+            prog1Results += studentInfo.returnStudentResults();
+        else
+            prog2Results += studentInfo.returnStudentResults();
+    }
+
+    /**
+     * Sets the text of the resultsBox to have the report.
+     */
+    private void showReport() {
+        String allResults = prog1Results + prog2Results;
+
+        resultsBox.setText(getString(R.string.report, allResults));
+    }
+
+    /**
+     * Checks if all marks entered are valid.
+     * @return true if valid.
+     */
+    private boolean isValid(){
+        if(Double.parseDouble(mark1.getText().toString()) > 100 || Double.parseDouble(mark1.getText().toString()) < 0){
+            Toast.makeText(getApplicationContext(), "First Evaluation Invalid!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(Double.parseDouble(mark2.getText().toString()) > 100 || Double.parseDouble(mark2.getText().toString()) < 0){
+            Toast.makeText(getApplicationContext(), "Second Evaluation Invalid!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(Double.parseDouble(mark3.getText().toString()) > 100 || Double.parseDouble(mark3.getText().toString()) < 0){
+            Toast.makeText(getApplicationContext(), "Third Evaluation Invalid!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else
+            return true;
+    }
 }
